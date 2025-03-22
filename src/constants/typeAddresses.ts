@@ -1,0 +1,1 @@
+export const TYPE_ADDRESSES = ['TRABALHO', 'RESIDENCIAL', 'FÁBRICA', 'ARMAZÉM']
