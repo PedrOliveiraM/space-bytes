@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Space Bytes Delivery ![Em Andamento](https://img.shields.io/badge/status-concluído-green)
 
-## Getting Started
+Este projeto tem como objetivo desenvolver um sistema de delivery interplanetário entre Marte e a Terra. Com a expansão da SpaceX na década de 2050 e a redução dos custos de transporte, a humanidade passou a exportar e importar dispositivos eletrônicos entre os planetas. Este sistema automatiza o processo de cadastro de endereços e armazenamento local dos pedidos.
 
-First, run the development server:
+## Tecnologias
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Tecnologias](https://skillicons.dev/icons?i=nextjs,typescript,tailwind)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Índice
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Space Bytes Delivery](#space-bytes-delivery)
+  - [Tecnologias](#tecnologias)
+  - [Índice](#índice)
+  - [Sobre](#sobre)
+  - [Funcionalidades](#funcionalidades)
+  - [Instalação](#instalação)
+  - [Uso](#uso)
+  - [Design](#design)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Sobre
 
-## Learn More
+O **Interplanetary Delivery** foi criado para facilitar o transporte de eletrônicos entre Marte e a Terra. Diferentemente da Terra, onde os endereços são estruturados por países e cidades, em Marte utilizamos lotes de quatro dígitos para identificar as localizações das fábricas e armazéns. O sistema permitirá que usuários cadastrem endereços para envio e recebimento de produtos interplanetários.
 
-To learn more about Next.js, take a look at the following resources:
+## Funcionalidades
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Cadastro de Endereços**
+  Permite que os usuários cadastrem endereços na Terra e em Marte (lotes de 4 dígitos).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Armazenamento Local**
+  Os endereços cadastrados são armazenados localmente, sem necessidade de backend.
 
-## Deploy on Vercel
+- **Interface Moderna**
+  Construída com **Next.js**, **TypeScript** e **Tailwind CSS**, garantindo uma interface responsiva e intuitiva.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Escolha de Design**
+  Baseado em referências de design pré-definidas para melhor experiência do usuário.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Instalação
+
+1. Clone o repositório:
+
+   ```sh
+   git clone https://github.com/PedrOliveiraM/space-bytes
+   ```
+
+2. Acesse o diretório do projeto:
+
+   ```sh
+   cd space-bytes
+   ```
+
+3. Instale as dependências:
+
+   ```sh
+   npm install
+   ```
+
+4. Inicie o servidor de desenvolvimento:
+
+   ```sh
+   npm run dev
+   ```
+
+## Uso
+
+Acesse `http://localhost:3000` no navegador e utilize a interface para cadastrar endereços de envio e recebimento.
+
+## Design
+
+![HomePage](./public/HomePage.png)
+![HomePage](./public/Step-2.png)
+![HomePage](./public/Step-3.png)
+![HomePage](./public/Step-3-error.png)
+![HomePage](./public/Modal-success.png)
