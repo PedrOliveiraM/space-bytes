@@ -62,6 +62,8 @@ export function FormRegister() {
 
   const onSubmit = (data: FormRegisterData) => {
     try {
+      if (!isValid) showErrorModal()
+      console.log('Form data:', data)
       localStorage.setItem('formData', JSON.stringify(data))
       showSuccessModal()
       setTimeout(() => {
@@ -133,81 +135,78 @@ export function FormRegister() {
 
         <Step>
           <form onSubmit={handleSubmit(onSubmit)}>
-            {checked === 'Terra' ? (
-              <div className="flex w-full max-w-md flex-col gap-3">
-                <h2 className="text-xl font-bold">Endereço na Terra</h2>
+            <div className="flex w-full max-w-md flex-col gap-3">
+              <h2 className="text-xl font-bold">Detalhes do Endereço</h2>
 
-                <Label>Nome Completo</Label>
-                <Input
-                  {...register('nome')}
-                  placeholder="Digite seu nome completo"
-                />
-                {errors.nome && (
-                  <p className="text-red-500">{errors.nome.message}</p>
-                )}
+              <Label>Nome Completo</Label>
+              <Input
+                {...register('nome')}
+                placeholder="Digite seu nome completo"
+              />
+              {errors.nome && (
+                <p className="text-red-500">{errors.nome.message}</p>
+              )}
 
-                <Label>Telefone</Label>
-                <Input
-                  {...register('telefone')}
-                  placeholder="(99) 99999-9999"
-                />
-                {errors.telefone && (
-                  <p className="text-red-500">{errors.telefone.message}</p>
-                )}
+              <Label>Telefone</Label>
+              <Input {...register('telefone')} placeholder="(99) 99999-9999" />
+              {errors.telefone && (
+                <p className="text-red-500">{errors.telefone.message}</p>
+              )}
 
-                <Label>Endereço</Label>
-                <Input
-                  {...register('endereco')}
-                  placeholder="Rua, número, complemento"
-                />
-                {errors.endereco && (
-                  <p className="text-red-500">{errors.endereco.message}</p>
-                )}
+              {checked === 'Terra' ? (
+                <div className="flex flex-col gap-3">
+                  <Label>Endereço</Label>
+                  <Input
+                    {...register('endereco')}
+                    placeholder="Rua, número, complemento"
+                  />
+                  {errors.endereco && (
+                    <p className="text-red-500">{errors.endereco.message}</p>
+                  )}
 
-                <Label>País</Label>
-                <Input {...register('pais')} placeholder="Digite seu país" />
-                {errors.pais && (
-                  <p className="text-red-500">{errors.pais.message}</p>
-                )}
+                  <Label>País</Label>
+                  <Input {...register('pais')} placeholder="Digite seu país" />
+                  {errors.pais && (
+                    <p className="text-red-500">{errors.pais.message}</p>
+                  )}
 
-                <Label>Estado</Label>
-                <Input
-                  {...register('estado')}
-                  placeholder="Digite seu estado"
-                />
-                {errors.estado && (
-                  <p className="text-red-500">{errors.estado.message}</p>
-                )}
+                  <Label>Estado</Label>
+                  <Input
+                    {...register('estado')}
+                    placeholder="Digite seu estado"
+                  />
+                  {errors.estado && (
+                    <p className="text-red-500">{errors.estado.message}</p>
+                  )}
 
-                <Label>Cidade</Label>
-                <Input
-                  {...register('cidade')}
-                  placeholder="Digite sua cidade"
-                />
-                {errors.cidade && (
-                  <p className="text-red-500">{errors.cidade.message}</p>
-                )}
+                  <Label>Cidade</Label>
+                  <Input
+                    {...register('cidade')}
+                    placeholder="Digite sua cidade"
+                  />
+                  {errors.cidade && (
+                    <p className="text-red-500">{errors.cidade.message}</p>
+                  )}
 
-                <Label>CEP</Label>
-                <Input {...register('cep')} placeholder="XXXXX-XXX" />
-                {errors.cep && (
-                  <p className="text-red-500">{errors.cep.message}</p>
-                )}
-              </div>
-            ) : (
-              <div className="flex w-full max-w-md flex-col gap-3">
-                <h2 className="text-xl font-bold">Endereço em Marte</h2>
-
-                <Label>Lote</Label>
-                <Input
-                  {...register('lote')}
-                  placeholder="Digite o número do lote (4 dígitos)"
-                />
-                {errors.lote && (
-                  <p className="text-red-500">{errors.lote.message}</p>
-                )}
-              </div>
-            )}
+                  <Label>CEP</Label>
+                  <Input {...register('cep')} placeholder="XXXXX-XXX" />
+                  {errors.cep && (
+                    <p className="text-red-500">{errors.cep.message}</p>
+                  )}
+                </div>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  <Label>Lote</Label>
+                  <Input
+                    {...register('lote')}
+                    placeholder="Digite o número do lote (4 dígitos)"
+                  />
+                  {errors.lote && (
+                    <p className="text-red-500">{errors.lote.message}</p>
+                  )}
+                </div>
+              )}
+            </div>
           </form>
         </Step>
       </Stepper>
