@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 /*
-	Installed from https://reactbits.dev/ts/tailwind/
+  Installed from https://reactbits.dev/ts/tailwind/
 */
 'use client'
 import { AnimatePresence, motion, Variants } from 'framer-motion'
@@ -32,13 +33,17 @@ interface StepperProps extends HTMLAttributes<HTMLDivElement> {
     currentStep: number
     onStepClick: (clicked: number) => void
   }) => ReactNode
+  validateBeforeNext?: () => boolean // Nova prop para validação
+  validateStep?: number // Passo que requer validação
+  isFinalStep?: boolean // Se o passo atual é o último
+  onSubmit?: () => void // Função para ser chamada ao enviar o formulário
 }
 
 export default function Stepper({
   children,
   initialStep = 1,
-  onStepChange = () => {},
-  onFinalStepCompleted = () => {},
+  onStepChange = () => { },
+  onFinalStepCompleted = () => { },
   stepCircleContainerClassName = '',
   stepContainerClassName = '',
   contentClassName = '',
@@ -49,6 +54,10 @@ export default function Stepper({
   nextButtonText = 'Continue',
   disableStepIndicators = false,
   renderStepIndicator,
+  validateBeforeNext,
+  validateStep,
+  isFinalStep,
+  onSubmit,
   ...rest
 }: StepperProps) {
   const [currentStep, setCurrentStep] = useState<number>(initialStep)
@@ -76,14 +85,21 @@ export default function Stepper({
 
   const handleNext = () => {
     if (!isLastStep) {
-      setDirection(1)
-      updateStep(currentStep + 1)
+      if (validateStep === currentStep && validateBeforeNext && !validateBeforeNext()) {
+        return;
+      }
+      setDirection(1);
+      updateStep(currentStep + 1);
     }
-  }
+  };
 
   const handleComplete = () => {
+    if (validateStep === currentStep && validateBeforeNext && !validateBeforeNext()) {
+      return;
+    }
     setDirection(1)
     updateStep(totalSteps + 1)
+    onSubmit!()
   }
 
   return (
@@ -143,18 +159,17 @@ export default function Stepper({
         {!isCompleted && (
           <div className={`px-8 pb-8 ${footerClassName}`}>
             <div
-              className={`mt-10 flex ${
-                currentStep !== 1 ? 'justify-between' : 'justify-end'
-              }`}
+              className={`mt-10 flex ${currentStep !== 1 ? 'justify-between' : 'justify-end'
+                }`}
             >
               {currentStep !== 1 && (
                 <button
+                  type="button"
                   onClick={handleBack}
-                  className={`rounded px-2 py-1 transition duration-350 ${
-                    currentStep === 1
-                      ? 'pointer-events-none text-neutral-400 opacity-50'
-                      : 'text-neutral-400 hover:text-neutral-700'
-                  }`}
+                  className={`rounded px-2 py-1 transition duration-350 ${currentStep === 1
+                    ? 'pointer-events-none text-neutral-400 opacity-50'
+                    : 'text-neutral-400 hover:text-neutral-700'
+                    }`}
                   {...backButtonProps}
                 >
                   {backButtonText}
@@ -164,6 +179,7 @@ export default function Stepper({
                 onClick={isLastStep ? handleComplete : handleNext}
                 className="flex items-center justify-center rounded-full bg-green-500 px-3.5 py-1.5 font-medium tracking-tight text-white transition duration-350 hover:bg-green-600 active:bg-green-700"
                 {...nextButtonProps}
+                type={isFinalStep ? 'submit' : 'button'}
               >
                 {isLastStep ? 'Complete' : nextButtonText}
               </button>
@@ -349,7 +365,7 @@ function StepConnector({ isComplete }: StepConnectorProps) {
   )
 }
 
-interface CheckIconProps extends React.SVGProps<SVGSVGElement> {}
+interface CheckIconProps extends React.SVGProps<SVGSVGElement> { }
 
 function CheckIcon(props: CheckIconProps) {
   return (
